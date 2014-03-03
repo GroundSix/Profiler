@@ -2,10 +2,11 @@
 
 namespace GroundSix\Component\Model;
 
-
-class Message {
-    protected $time;
-    protected $message;
+class Message
+{
+    protected
+        $time,
+        $message;
 
     public function __construct($message)
     {

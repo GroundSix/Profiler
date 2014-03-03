@@ -8,10 +8,11 @@ namespace GroundSix\Component\Model;
  */
 class Profile
 {
-    protected $startTime;
-    protected $endTime;
-    protected $messages = array();
-    protected $profiles = array();
+    protected
+        $startTime,
+        $endTime,
+        $messages = array(),
+        $profiles = array();
 
     public function __construct($message)
     {
@@ -28,7 +29,7 @@ class Profile
     }
 
     /**
-     * @param string $message
+     * @param String $message
      */
     public function addMessage($message)
     {
@@ -52,7 +53,7 @@ class Profile
     }
 
     /**
-     * @return int
+     * @return Int
      */
     public function getStartTime()
     {
@@ -60,7 +61,7 @@ class Profile
     }
 
     /**
-     * @return int
+     * @return Int
      */
     public function getEndTime()
     {
@@ -68,7 +69,7 @@ class Profile
     }
 
     /**
-     *
+     * @return Null
      */
     public function close()
     {
