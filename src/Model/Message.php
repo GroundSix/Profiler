@@ -10,7 +10,7 @@ class Message
 
     public function __construct($message)
     {
-        $this->time = microtime();
+        $this->time = microtime(true);
         $this->message = $message;
     }
 

@@ -18,11 +18,12 @@ class Profile
     public function __construct($message)
     {
         $this->addMessage($message);
-        $this->startTime = microtime();
+        $this->startTime = microtime(true);
     }
 
     /**
      * @param Profile $profile
+     * @throws \Exception
      */
     public function addProfile(Profile $profile)
     {
@@ -36,6 +37,7 @@ class Profile
 
     /**
      * @param String $message
+     * @throws \Exception
      */
     public function addMessage($message)
     {
@@ -84,6 +86,6 @@ class Profile
     public function close()
     {
         $this->open = false;
-        $this->endTime = microtime();
+        $this->endTime = microtime(true);
     }
 }
