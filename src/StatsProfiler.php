@@ -12,7 +12,7 @@ class StatsProfiler implements Profiler
         $logger,
         $parent;
 
-    public function __construct(Profiler $profiler)
+    public function __construct(Profiler $profiler = null)
     {
         $this->parent = $profiler;
         $this->logger = new \Psr\Log\NullLogger();
