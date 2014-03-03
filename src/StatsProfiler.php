@@ -44,7 +44,7 @@ class StatsProfiler implements Profiler
     public function __construct(Profiler &$profiler = null)
     {
         $this->profile = new Model\Profile;
-        $this->parent = $profiler;
+        $this->parent = &$profiler;
         $this->logger = new \Psr\Log\NullLogger();
     }
 
@@ -74,9 +74,6 @@ class StatsProfiler implements Profiler
     public function stop()
     {
         $this->profile->close();
-        if (!is_null($this->parent)) {
-            $this->parent->profile->addProfile($this->profile);
-        }
     }
 
     /**
