@@ -2,8 +2,6 @@
 
 namespace GroundSix\Component;
 
-use Mockery as M;
-
 class ProfileTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -11,10 +9,11 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $this->profiler = M::mock('Profiler');
+        $this->profiler = new StatsProfiler;
     }
 
     public function testCreateProfile()
     {
+
     }
 } 
