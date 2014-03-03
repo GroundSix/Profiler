@@ -22,7 +22,7 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $messages = $this->profile->getMessages();
         $this->assertEquals(1, count($messages));
         $this->assertEquals("Model Test 1", $messages[0]->getMessage());
-        $this->assertLessThanOrEqual(microtime(), $messages[0]->getTime);
+        $this->assertLessThanOrEqual(microtime(), $messages[0]->getTime());
     }
 
     public function testAddMessage()

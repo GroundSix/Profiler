@@ -12,7 +12,8 @@ class Profile
         $startTime,
         $endTime,
         $messages = array(),
-        $profiles = array();
+        $profiles = array(),
+        $open = true;
 
     public function __construct($message)
     {
@@ -25,7 +26,12 @@ class Profile
      */
     public function addProfile(Profile $profile)
     {
-        $this->profiles[] = $profile;
+        if ($this->open) {
+            $this->profiles[] = $profile;
+        } else {
+            throw new \Exception("Trying to add profile after closing the profile");
+        }
+
     }
 
     /**
@@ -33,7 +39,11 @@ class Profile
      */
     public function addMessage($message)
     {
-        $this->messages[] = new Message($message);
+        if ($this->open) {
+            $this->messages[] = new Message($message);
+        } else {
+            throw new \Exception("Trying to add message after closing the profile");
+        }
     }
 
     /**
@@ -73,6 +83,7 @@ class Profile
      */
     public function close()
     {
+        $this->open = false;
         $this->endTime = microtime();
     }
 }
