@@ -1,6 +1,6 @@
 <?php
 
-class GroundSix\Component;
+namespace GroundSix\Component;
 
 class NullProfiler implements Profiler
 {
