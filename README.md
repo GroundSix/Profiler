@@ -1,10 +1,11 @@
 # Profiler
 
 [![Build Status](https://travis-ci.org/GroundSix/Profiler.png?branch=master)](https://travis-ci.org/GroundSix/Profiler)
+[![Total Downloads](https://poser.pugx.org/groundsix/profiler/downloads.png)](https://packagist.org/packages/groundsix/profiler)
 
 ### Tests
 
-	phpunit --configuration phpunit.xml 
+	phpunit --configuration phpunit.xml
 
 ### License
 
