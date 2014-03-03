@@ -31,7 +31,7 @@ class Message
      * Passes the message through and sets the
      * initial time
      *
-     * @param String new message
+     * @param String $message new message
      */
     public function __construct($message)
     {
@@ -54,7 +54,7 @@ class Message
      * Gets the time for a given
      * push
      * 
-     * @return Int
+     * @return Float
      */
     public function getTime()
     {

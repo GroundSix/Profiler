@@ -30,12 +30,20 @@ class StatsProfiler implements Profiler
      * @var \GroundSix\Component\StatsProfiler
      */
     protected
+        /**
+         * @var Model\Profile
+         */
         $profile,
+        $profilers = array(),
         $logger,
-        $parent;
+        /**
+         * @var Profiler
+         */
+    $parent;
 
-    public function __construct(Profiler $profiler = null)
+    public function __construct(Profiler &$profiler = null)
     {
+        $this->profile = new Model\Profile;
         $this->parent = $profiler;
         $this->logger = new \Psr\Log\NullLogger();
     }
@@ -50,8 +58,13 @@ class StatsProfiler implements Profiler
      */
     public function start($message = '')
     {
-        $this->profile = new Model\Profile($message);
-        return new StatsProfiler($this);
+        $profiler = new StatsProfiler($this);
+        if ($message !== '') {
+            $profiler->push($message);
+        }
+
+        $this->profilers[] = &$profiler;
+        return $profiler;
     }
 
     /**
@@ -73,21 +86,37 @@ class StatsProfiler implements Profiler
      */
     public function push($message = '')
     {
-
+        $this->profile->addMessage($message);
     }
 
+    /**
+     * Get the profile
+     *
+     * @return Model\Profile
+     */
     public function fetch()
     {
-
+        $profile = clone $this->profile;
+        foreach ($this->profilers as $profiler) {
+            $profile->addProfile($profiler->fetch());
+        }
+        return $profile;
     }
 
+    /**
+     * Kill all parent and child profiles
+     */
     public function kill()
     {
-
+        $this->stop();
+        if (! is_null($this->parent)) {
+            $this->parent->kill();
+        }
     }
 
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
+
 }

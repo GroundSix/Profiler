@@ -14,17 +14,20 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
 
     public function testModelInstantiation()
     {
-        $profile = new Profile("Model Test 1");
+        $profile = new Profile();
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $profile);
         $messages = $profile->getMessages();
-        $this->assertEquals(1, count($messages));
-        $this->assertEquals("Model Test 1", $messages[0]->getMessage());
-        $this->assertLessThanOrEqual(microtime(true), $messages[0]->getTime());
+        $this->assertEquals(0, count($messages));
     }
 
     public function testAddMessage()
     {
-        $profile = new Profile("Model Test 1");
+        $profile = new Profile();
+        $profile->addMessage("Model Test 1");
+        $messages = $profile->getMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertEquals("Model Test 1", $messages[0]->getMessage());
+        $this->assertLessThanOrEqual(microtime(true), $messages[0]->getTime());
         $profile->addMessage("Model Test 2");
         $messages = $profile->getMessages();
         $this->assertEquals(2, count($messages));
@@ -59,25 +62,21 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
 
     public function testAddProfile()
     {
-        $profile = new Profile("Test Message 1");
-        $new_profile = new Profile("Test Message 2");
+        $profile = new Profile();
+        $new_profile = new Profile();
         $profile->addProfile($new_profile);
         $child_profiles = $profile->getProfiles();
 
         $this->assertEquals(1, count($child_profiles));
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $child_profiles[0]);
-        $child_profile_0_messages = $child_profiles[0]->getMessages();
-        $this->assertEquals($child_profile_0_messages[0]->getMessage(), "Test Message 2");
 
-        $another_child_profile = new Profile("Test Message 3");
+        $another_child_profile = new Profile();
 
         $profile->addProfile($another_child_profile);
 
         $child_profiles = $profile->getProfiles();
         $this->assertEquals(2, count($child_profiles));
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $child_profiles[1]);
-        $child_profile_1_messages = $child_profiles[1]->getMessages();
-        $this->assertEquals($child_profile_1_messages[0]->getMessage(), "Test Message 3");
         $exception = false;
 
         try {
@@ -91,7 +90,7 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $profile->close();
         $exception = false;
         try {
-            $third_profile = new Profile("Test Message 4");
+            $third_profile = new Profile();
             $profile->addProfile($third_profile);
         } catch (\Exception $e) {
             $exception = true;
@@ -99,6 +98,5 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($exception);
         $closed_profiles = $profile->getProfiles();
         $this->assertEquals(2, count($closed_profiles));
-
     }
 }

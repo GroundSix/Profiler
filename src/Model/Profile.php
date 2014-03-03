@@ -27,12 +27,14 @@ class Profile
         $startTime,
         $endTime,
         $messages = array(),
-        $profiles = array(),
+        /**
+         * @var Profile[]
+         */
+    $profiles = array(),
         $open = true;
 
-    public function __construct($message)
+    public function __construct()
     {
-        $this->addMessage($message);
         $this->startTime = microtime(true);
     }
 
@@ -40,7 +42,7 @@ class Profile
      * @param Profile $profile
      * @throws \Exception
      */
-    public function addProfile(Profile $profile)
+    public function addProfile(Profile &$profile)
     {
         if ($this->open) {
             if (is_a($profile, '\GroundSix\Component\Model\Profile')) {
@@ -88,7 +90,7 @@ class Profile
     }
 
     /**
-     * @return Int
+     * @return Float
      */
     public function getStartTime()
     {
@@ -96,7 +98,7 @@ class Profile
     }
 
     /**
-     * @return Int
+     * @return Float
      */
     public function getEndTime()
     {
@@ -110,5 +112,9 @@ class Profile
     {
         $this->open = false;
         $this->endTime = microtime(true);
+
+        foreach ($this->profiles as $profile) {
+            $profile->close();
+        }
     }
 }
