@@ -93,7 +93,8 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $exception = false;
 
         try {
-            $profile->addProfile("error");
+            $error_profile = "error";
+            $profile->addProfile($error_profile);
         } catch (\Exception $e) {
             $exception = true;
         }
