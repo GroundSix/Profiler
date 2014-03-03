@@ -9,6 +9,6 @@
         "psr/log": "1.0.0"
     },
     "autoload": {
-        "psr-4": {"GroundSix\\Component\\": "src/"}
+        "psr-4": { "GroundSix\\Component\\": "src/" }
     }
 }

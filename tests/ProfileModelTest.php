@@ -24,6 +24,5 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $this->profile);
         $this->assertEquals(1, count($this->profile->messages));
     }
-
-
-} 
+}
+ 
