@@ -16,6 +16,11 @@
 
 namespace GroundSix\Component;
 
+/**
+ * Interface Profiler
+ * 
+ * @package GroundSix\Component
+ */
 interface Profiler
 {
     public function start($message = '');
