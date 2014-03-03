@@ -31,6 +31,20 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Model Test 2", $messages[1]->getMessage());
         $this->assertLessThanOrEqual(microtime(true), $messages[1]->getTime());
         $this->assertGreaterThanOrEqual($messages[0]->getTime(), $messages[1]->getTime());
+
+        $exception = false;
+
+        try {
+            $profile->addMessage(array("Invalid message"));
+        } catch (\Exception $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+        $messages = $profile->getMessages();
+
+        $this->assertEquals(2, count($messages));
+
         $profile->close();
         $exception = false;
         try {
@@ -64,6 +78,16 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $child_profiles[1]);
         $child_profile_1_messages = $child_profiles[1]->getMessages();
         $this->assertEquals($child_profile_1_messages[0]->getMessage(), "Test Message 3");
+        $exception = false;
+
+        try {
+            $profile->addProfile("error");
+        } catch (\Exception $e) {
+            $exception = true;
+        }
+
+        $this->assertTrue($exception);
+
         $profile->close();
         $exception = false;
         try {
