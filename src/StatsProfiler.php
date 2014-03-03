@@ -25,9 +25,9 @@ class StatsProfiler implements Profiler
 {
 
     /**
-     * @var GroundSix\Component\Model\Profile $profile
-     * @var Psr\Log $logger
-     * @var GroundSix\Component\StatsProfiler
+     * @var \GroundSix\Component\Model\Profile $profile
+     * @var \Psr\Log\AbstractLogger $logger
+     * @var \GroundSix\Component\StatsProfiler
      */
     protected
         $profile,
@@ -86,7 +86,7 @@ class StatsProfiler implements Profiler
 
     }
 
-    public function setLogger(Psr\Log\LoggerInterface $logger)
+    public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
