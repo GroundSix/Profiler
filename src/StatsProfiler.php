@@ -8,7 +8,14 @@ class StatsProfiler implements Profiler
     /**
      * @var Array $profiles;
      */
-    protected $profiles;
+    protected
+    	$profiles,
+		$logger;
+
+	public function __construct()
+	{
+		$this->logger = \Psr\Log\NullLogger();
+	}
 
 	/**
 	 * Starts the profiling process
@@ -53,8 +60,8 @@ class StatsProfiler implements Profiler
 
     }
 
-    public function setLogger()
+    public function setLogger(Psr\Log\LoggerInterface $logger)
     {
-    	
+    	$this->logger = $logger;
     }
 }
