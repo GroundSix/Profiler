@@ -48,7 +48,6 @@ class StatsProfiler implements Profiler
         $this->logger = new \Psr\Log\NullLogger();
     }
 
-
     /**
      * Starts the profiling process
      *
@@ -75,6 +74,9 @@ class StatsProfiler implements Profiler
     public function stop()
     {
         $this->profile->close();
+        if (!is_null($this->parent)) {
+            $this->parent->profile->addProfile($this->profile);
+        }
     }
 
     /**

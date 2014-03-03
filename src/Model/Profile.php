@@ -40,7 +40,9 @@ class Profile
 
     /**
      * @param Profile $profile
+     * 
      * @throws \Exception
+     * @return Null
      */
     public function addProfile(Profile &$profile)
     {
@@ -53,12 +55,13 @@ class Profile
         } else {
             throw new \Exception("Trying to add profile after closing the profile");
         }
-
     }
 
     /**
      * @param String $message
+     * 
      * @throws \Exception
+     * @return Null
      */
     public function addMessage($message)
     {
@@ -74,6 +77,8 @@ class Profile
     }
 
     /**
+     * Gets all of the messages
+     * 
      * @return \GroundSix\Component\Model\Message[]
      */
     public function getMessages()
@@ -82,6 +87,8 @@ class Profile
     }
 
     /**
+     * Gets all of the profiles
+     * 
      * @return \GroundSix\Component\Model\Profile[]
      */
     public function getProfiles()
