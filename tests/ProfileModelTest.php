@@ -24,7 +24,6 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Model Test 1", $messages[0]->getMessage());
         $this->assertLessThanOrEqual(microtime(), $messages[0]->getTime);
     }
-<<<<<<< HEAD
 
     public function testAddMessage()
     {
@@ -36,7 +35,3 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual($messages[0]->getTime(), $messages[1]->getTime());
     }
 }
-=======
-}
- 
->>>>>>> d88f633c112662b000f96641b84b814933449785
