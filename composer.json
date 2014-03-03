@@ -5,7 +5,6 @@
     "keywords": ["groundsix","profiler","execution", "time", "stats"],
     "require-dev": {
         "php": ">=5.3.0",
-        "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {

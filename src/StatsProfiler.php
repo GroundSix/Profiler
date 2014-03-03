@@ -2,18 +2,23 @@
 
 namespace GroundSix\Component;
 
-class StatsProfiler
+class StatsProfiler implements Profiler
 {
+
+    /**
+     * @var Array $profiles;
+     */
+    protected $profiles;
+
 	/**
 	 * Starts the profiling process
 	 * 
-	 * @param  String Optional message to be logged on start
+	 * @param  String $message Optional message to be logged on start
 	 * 
-	 * @return Object \GroundSix\Component\StatsProfiler
+	 * @return Object|\GroundSix\Component\StatsProfiler
 	 */
     public function start($message = '')
     {
-
     }
 
 	/**
@@ -29,7 +34,7 @@ class StatsProfiler
 	/**
 	 * Appends a message to the profile at the current time
 	 * 
-	 * @param  String Optional message to be logged on push
+	 * @param  String $message Optional message to be logged on push
 	 * 
 	 * @return Null
 	 */
