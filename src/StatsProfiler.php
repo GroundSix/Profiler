@@ -6,9 +6,9 @@ class StatsProfiler implements Profiler
 {
 
     /**
-     * @var Array $profiles;
+     * @var Model\Profile $profile;
      */
-    protected $profiles;
+    protected $profile;
 
 	/**
 	 * Starts the profiling process
@@ -19,6 +19,8 @@ class StatsProfiler implements Profiler
 	 */
     public function start($message = '')
     {
+        $this->profile = new Model\Profile($message);
+        return new StatsProfiler($this);
     }
 
 	/**
@@ -28,7 +30,7 @@ class StatsProfiler implements Profiler
 	 */
     public function stop()
     {
-
+        $this->profile->endTime = microtime();
     }
 
 	/**
