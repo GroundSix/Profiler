@@ -1,9 +1,14 @@
 {
+	"name" : "groundsix/profiler",
+	"type" : "libaray",
+	"description" : "A profiler to monitor code execution stats",
+	"keywords": ["groundsix","profiler","execution", "time", "stats"],
     "require-dev": {
+    	"php": ">=5.3.0",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
-        "psr-4": {"GroundSix\\Component\\": "/src"}
+        "psr-4": {"GroundSix\\Component\\": "src/"}
     }
 }
