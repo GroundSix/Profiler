@@ -47,4 +47,9 @@ class StatsProfiler
     {
 
     }
+
+    public function setLogger()
+    {
+    	
+    }
 }
