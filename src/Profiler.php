@@ -9,4 +9,4 @@ interface Profiler
     public function push($message);
     public function fetch();
     public function kill();
-} 
+}
