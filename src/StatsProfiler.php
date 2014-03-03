@@ -16,13 +16,21 @@
 
 namespace GroundSix\Component;
 
+/**
+ * Class StatsProfiler
+ * 
+ * @package GroundSix\Component
+ */
 class StatsProfiler implements Profiler
 {
 
     /**
-     * @var Model\Profile $profile
+     * @var GroundSix\Component\Model\Profile $profile
+     * @var Psr\Log $logger
+     * @var GroundSix\Component\StatsProfiler
      */
-    protected $profile,
+    protected
+        $profile,
         $logger,
         $parent;
 
