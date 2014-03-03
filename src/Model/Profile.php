@@ -28,7 +28,11 @@ class Profile
     public function addProfile(Profile $profile)
     {
         if ($this->open) {
-            $this->profiles[] = $profile;
+            if (is_a($profile, '\GroundSix\Component\Model\Profile')) {
+                $this->profiles[] = $profile;
+            } else {
+                throw new \Exception("Provided object is not a Profile");
+            }
         } else {
             throw new \Exception("Trying to add profile after closing the profile");
         }
@@ -42,7 +46,11 @@ class Profile
     public function addMessage($message)
     {
         if ($this->open) {
-            $this->messages[] = new Message($message);
+            if (is_string($message)) {
+                $this->messages[] = new Message($message);
+            } else {
+                throw new \Exception("Message provided is not a string");
+            }
         } else {
             throw new \Exception("Trying to add message after closing the profile");
         }
