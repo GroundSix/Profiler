@@ -1,0 +1,9 @@
+{
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": {"GroundSix\\Component\\": "/src"}
+    }
+}
