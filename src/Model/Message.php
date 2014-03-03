@@ -4,22 +4,28 @@ namespace GroundSix\Component\Model;
 
 
 class Message {
-    public $_time;
-    public $_message;
+    protected $time;
+    protected $message;
 
     public function __construct($message)
     {
-        $this->_time = microtime();
-        $this->_message = $message;
+        $this->time = microtime();
+        $this->message = $message;
     }
 
-    public function __get($key)
+    /**
+     * @return string
+     */
+    public function getMessage()
     {
-        $key = '_' . $key;
-        if (isset($this->$key))
-        {
-            return $this->key;
-        }
-        return null;
+        return $this->message;
     }
-} 
+
+    /**
+     * @return int
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
+}

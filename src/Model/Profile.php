@@ -2,42 +2,76 @@
 
 namespace GroundSix\Component\Model;
 
-
+/**
+ * Class Profile
+ * @package GroundSix\Component\Model
+ */
 class Profile
 {
-    protected $_startTime;
-    protected $_endTime;
-    protected $_messages;
-    protected $_profiles = array();
+    protected $startTime;
+    protected $endTime;
+    protected $messages = array();
+    protected $profiles = array();
 
     public function __construct($message)
     {
         $this->addMessage($message);
-        $this->_startTime = microtime();
+        $this->startTime = microtime();
     }
 
+    /**
+     * @param Profile $profile
+     */
     public function addProfile(Profile $profile)
     {
-        $this->_profiles[] = $profile;
+        $this->profiles[] = $profile;
     }
 
+    /**
+     * @param string $message
+     */
     public function addMessage($message)
     {
-        $this->_messages[] = new Message($message);
+        $this->messages[] = new Message($message);
     }
 
-    public function __get($key)
+    /**
+     * @return \GroundSix\Component\Model\Message[]
+     */
+    public function getMessages()
     {
-        $key = '_' . $key;
-        if (isset($this->$key))
-        {
-            return $this->$key;
-        }
-        return null;
+        return $this->messages;
     }
 
+    /**
+     * @return \GroundSix\Component\Model\Profile[]
+     */
+    public function getProfiles()
+    {
+        return $this->profiles;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    /**
+     *
+     */
     public function close()
     {
-        $this->_endTime = microtime();
+        $this->endTime = microtime();
     }
 }

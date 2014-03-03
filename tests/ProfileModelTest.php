@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: andrew
- * Date: 03/03/2014
- * Time: 13:24
- */
 
 namespace GroundSix\Component;
 
@@ -18,12 +12,26 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
      */
     public $profile;
 
-    public function testModelInstantiation()
+    public function __construct()
     {
         $this->profile = new Profile("Model Test 1");
+    }
+    public function testModelInstantiation()
+    {
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $this->profile);
-        $this->assertEquals(1, count($this->profile->messages));
+        $messages = $this->profile->getMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertEquals("Model Test 1", $messages[0]->getMessage());
+        $this->assertLessThanOrEqual(microtime(), $messages[0]->getTime);
     }
 
-
-} 
+    public function testAddMessage()
+    {
+        $this->profile->addMessage("Model Test 2");
+        $messages = $this->profile->getMessages();
+        $this->assertEquals(2, count($messages));
+        $this->assertEquals("Model Test 2", $messages[1]->getMessage());
+        $this->assertLessThanOrEqual(microtime(), $messages[1]->getTime());
+        $this->assertGreaterThanOrEqual($messages[0]->getTime(), $messages[1]->getTime());
+    }
+}
