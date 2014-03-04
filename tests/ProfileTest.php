@@ -50,6 +50,25 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $profiler_3 = $profiler_2->start();
         $profiler_4 = $profiler_3->start();
         $profiler_5 = $profiler_4->start();
+
+        $profiler_4->stop();
+        $this->assertNotNull($profiler_4->fetch()->getEndTime());
+        $this->assertNotNull($profiler_5->fetch()->getEndTime());
+        $this->assertNull($profiler_1->fetch()->getEndTime());
+        $this->assertNull($profiler_2->fetch()->getEndTime());
+        $this->assertNull($profiler_3->fetch()->getEndTime());
+        $profiler_3->stop();
+        $this->assertNotNull($profiler_4->fetch()->getEndTime());
+        $this->assertNotNull($profiler_5->fetch()->getEndTime());
+        $this->assertNull($profiler_1->fetch()->getEndTime());
+        $this->assertNull($profiler_2->fetch()->getEndTime());
+        $this->assertNotNull($profiler_3->fetch()->getEndTime());
+        $profiler_1->stop();
+        $this->assertNotNull($profiler_1->fetch()->getEndTime());
+        $this->assertNotNull($profiler_2->fetch()->getEndTime());
+        $this->assertNotNull($profiler_3->fetch()->getEndTime());
+        $this->assertNotNull($profiler_4->fetch()->getEndTime());
+        $this->assertNotNull($profiler_5->fetch()->getEndTime());
     }
 
     public function testKillProfiler()
@@ -59,5 +78,11 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $profiler_3 = $profiler_2->start();
         $profiler_4 = $profiler_3->start();
         $profiler_5 = $profiler_4->start();
+        $profiler_3->kill();
+        $this->assertNotNull($profiler_1->fetch()->getEndTime());
+        $this->assertNotNull($profiler_2->fetch()->getEndTime());
+        $this->assertNotNull($profiler_3->fetch()->getEndTime());
+        $this->assertNotNull($profiler_4->fetch()->getEndTime());
+        $this->assertNotNull($profiler_5->fetch()->getEndTime());
     }
 } 

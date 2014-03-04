@@ -20,7 +20,7 @@ class Profile implements \ArrayAccess, \Countable
         return count($this->profiles);
     }
 
-    public function add(\GroundSix\Component\Model\Profile $profile)
+    public function add(\GroundSix\Component\Model\Profile &$profile)
     {
         $this->profiles[] = $profile;
     }

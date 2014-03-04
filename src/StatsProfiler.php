@@ -34,7 +34,10 @@ class StatsProfiler implements Profiler
          * @var Model\Profile
          */
         $profile,
-        $profilers = array(),
+        /**
+         * @var StatsProfiler[]
+         */
+    $profilers = array(),
         $logger,
         /**
          * @var Profiler
@@ -73,6 +76,13 @@ class StatsProfiler implements Profiler
      */
     public function stop()
     {
+        foreach ($this->profilers as $profiler) {
+            $profile = $profiler->fetch();
+            if (is_null($this->profile->getEndTime())) {
+                $this->profile->addProfile($profiler->fetch());
+                $profiler->stop();
+            }
+        }
         $this->profile->close();
     }
 
@@ -95,6 +105,10 @@ class StatsProfiler implements Profiler
      */
     public function fetch()
     {
+        if (!is_null($this->profile->getEndTime()))
+        {
+            return $this->profile;
+        }
         $profile = clone $this->profile;
         foreach ($this->profilers as $profiler) {
             $profile->addProfile($profiler->fetch());
