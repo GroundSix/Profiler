@@ -1,19 +1,30 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: andrew
- * Date: 04/03/2014
- * Time: 08:47
+ * Ground Six Profiler
+ *
+ * @author Andrew Willis  twitter.com/ilovefluffy
+ * @author Harry Lawrence twitter.com/harry4_
+ *
+ * (c) Ground Six 2014
+ *
+ * License: MIT
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace GroundSix\Component\Model\Collection;
 
-
+/**
+ * Class Profile
+ *
+ * @package GroundSix\Component\Model\Collection
+ */
 class Profile implements \ArrayAccess, \Countable
 {
-
-    protected $profiles = array();
-
+    protected
+        $profiles = array();
 
     public function count()
     {
@@ -29,9 +40,6 @@ class Profile implements \ArrayAccess, \Countable
     {
         return $this->profiles;
     }
-
-
-
 
     /**
      * (PHP 5 >= 5.0.0)<br/>
@@ -82,7 +90,6 @@ class Profile implements \ArrayAccess, \Countable
      */
     public function offsetSet($offset, $value)
     {
-
         if (! is_a($value, '\GroundSix\Component\Model\Profile')) {
             throw new \Exception("Attempting to add an invalid item to the Profile collection");
         }
@@ -122,5 +129,4 @@ class Profile implements \ArrayAccess, \Countable
     {
         return $this->profiles;
     }
-
-} 
+}
