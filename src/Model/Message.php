@@ -9,7 +9,7 @@
  * (c) Ground Six 2014
  *
  * License: MIT
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -18,7 +18,7 @@ namespace GroundSix\Component\Model;
 
 /**
  * Class Message
- * 
+ *
  * @package GroundSix\Component\Model
  */
 class Message
@@ -42,7 +42,7 @@ class Message
     /**
      * Gets the message for a given
      * push
-     * 
+     *
      * @return String
      */
     public function getMessage()
@@ -53,7 +53,7 @@ class Message
     /**
      * Gets the time for a given
      * push
-     * 
+     *
      * @return Float
      */
     public function getTime()
@@ -74,6 +74,4 @@ class Message
         $time = $this->time;
         return compact('message', 'time');
     }
-
-
 }

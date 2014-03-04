@@ -9,7 +9,7 @@
  * (c) Ground Six 2014
  *
  * License: MIT
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -18,34 +18,34 @@ namespace GroundSix\Component\Model;
 
 /**
  * Class Profile
- * 
+ *
  * @package GroundSix\Component\Model
  */
 class Profile
 {
+    /**
+     * @var Int start time from mictotime
+     * @var Int end time from microtime
+     * @var Collection\Message
+     * @var Collection\Profile
+     */
     protected
         $startTime,
         $endTime,
-        /**
-         * @var Collection\Message
-         */
         $messages = null,
-        /**
-         * @var Collection\Profile
-         */
-    $profiles = null,
+        $profiles = null,
         $open = true;
 
     public function __construct()
     {
         $this->startTime = microtime(true);
-        $this->profiles = new Collection\Profile;
-        $this->messages = new Collection\Message;
+        $this->profiles  = new Collection\Profile;
+        $this->messages  = new Collection\Message;
     }
 
     /**
      * @param Profile $profile
-     * 
+     *
      * @throws \Exception
      * @return Null
      */
@@ -60,7 +60,7 @@ class Profile
 
     /**
      * @param String $message
-     * 
+     *
      * @throws \Exception
      * @return Null
      */
@@ -79,7 +79,7 @@ class Profile
 
     /**
      * Gets all of the messages
-     * 
+     *
      * @return \GroundSix\Component\Model\Collection\Message
      */
     public function getMessages()
@@ -89,7 +89,7 @@ class Profile
 
     /**
      * Gets all of the profiles
-     * 
+     *
      * @return \GroundSix\Component\Model\Collection\Profile
      */
     public function getProfiles()
@@ -137,12 +137,10 @@ class Profile
     {
         $object = new \stdClass;
         $object->startTime = $this->startTime;
-        $object->endTime = $this->endTime;
-        $object->messages = $this->messages;
-        $object->profiles = $this->profiles;
+        $object->endTime   = $this->endTime;
+        $object->messages  = $this->messages;
+        $object->profiles  = $this->profiles;
 
         return $object;
-
     }
-
 }
