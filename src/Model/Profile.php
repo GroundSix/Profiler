@@ -21,7 +21,7 @@ namespace GroundSix\Component\Model;
  * 
  * @package GroundSix\Component\Model
  */
-class Profile
+class Profile implements \JsonSerializable
 {
     protected
         $startTime,
@@ -124,4 +124,24 @@ class Profile
             $profile->close();
         }
     }
+
+    /**
+     * (PHP 5 >= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    public function jsonSerialize()
+    {
+        $object = new \stdClass;
+        $object->startTime = $this->startTime;
+        $object->endTime = $this->endTime;
+        $object->messages = $this->messages;
+        $object->profiles = $this->profiles;
+
+        return $object;
+
+    }
+
 }
