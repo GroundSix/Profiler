@@ -6,28 +6,39 @@
  * Time: 08:47
  */
 
-namespace GroundSix\Component\Model\Collection;
+namespace GroundSix\Component\Collection;
 
 
-class Message implements \ArrayAccess, \Countable
+class Profile implements \ArrayAccess, \Countable
 {
 
-    protected $messages = array();
+    /**
+     * @var
+     */
+    protected $profiles = array();
 
-
+    /**
+     * @return int
+     */
     public function count()
     {
-        return count($this->messages);
+        return count($this->profiles);
     }
 
-    public function add(\GroundSix\Component\Model\Message $message)
+    /**
+     * @param \GroundSix\Component\Model\Profile $profile
+     */
+    public function add(\GroundSix\Component\Model\Profile &$profile)
     {
-        $this->messages[] = $message;
+        $this->profiles[] = $profile;
     }
 
+    /**
+     * @return \GroundSix\Component\Model\Profile[]
+     */
     public function get()
     {
-        return $this->messages;
+        return $this->profiles;
     }
 
 
@@ -47,7 +58,7 @@ class Message implements \ArrayAccess, \Countable
      */
     public function offsetExists($offset)
     {
-        return isset($this->messages[$offset]);
+        return isset($this->profiles[$offset]);
 
     }
 
@@ -62,8 +73,8 @@ class Message implements \ArrayAccess, \Countable
      */
     public function offsetGet($offset)
     {
-        if (isset($this->messages[$offset])) {
-            return $this->messages[$offset];
+        if (isset($this->profiles[$offset])) {
+            return $this->profiles[$offset];
         }
         return null;
     }
@@ -83,18 +94,18 @@ class Message implements \ArrayAccess, \Countable
     public function offsetSet($offset, $value)
     {
 
-        if (! is_a($value, '\GroundSix\Component\Model\Message')) {
-            throw new \Exception("Attempting to add an invalid item to the message collection");
+        if (! is_a($value, '\GroundSix\Component\Model\Profile')) {
+            throw new \Exception("Attempting to add an invalid item to the Profile collection");
         }
         if (is_null($offset)) {
-            $this->messages[] = $value;
+            $this->profiles[] = $value;
             return;
         }
-        if (isset($this->messages[$offset])) {
-            throw new \Exception("Can not modify messages in a collection");
+        if (isset($this->profiles[$offset])) {
+            throw new \Exception("Can not modify profiles in a collection");
         }
 
-        $this->messages[$offset] = $value;
+        $this->profiles[$offset] = $value;
     }
 
     /**
@@ -108,7 +119,7 @@ class Message implements \ArrayAccess, \Countable
      */
     public function offsetUnset($offset)
     {
-        unset($this->messages[$offset]);
+        unset($this->profiles[$offset]);
     }
 
     /**
@@ -120,7 +131,7 @@ class Message implements \ArrayAccess, \Countable
      */
     public function jsonSerialize()
     {
-        return $this->messages;
+        return $this->profiles;
     }
 
 } 

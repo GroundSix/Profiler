@@ -15,7 +15,7 @@
  */
 
 namespace GroundSix\Component\Model;
-
+use GroundSix\Component\Collection as Collection;
 /**
  * Class Profile
  * 
@@ -23,18 +23,16 @@ namespace GroundSix\Component\Model;
  */
 class Profile
 {
-    protected
-        $startTime,
-        $endTime,
-        /**
-         * @var Collection\Message
-         */
-        $messages = null,
-        /**
-         * @var Collection\Profile
-         */
-    $profiles = null,
-        $open = true;
+    /** @var float $startTime */
+    protected $startTime;
+    /** @var float $endTime */
+    protected $endTime;
+    /** @var \GroundSix\Component\Collection\Message */
+    protected $messages;
+    /** @var \GroundSix\Component\Collection\Profile */
+    protected $profiles;
+    /** @var bool */
+    protected $open = true;
 
     public function __construct()
     {
@@ -80,7 +78,7 @@ class Profile
     /**
      * Gets all of the messages
      * 
-     * @return \GroundSix\Component\Model\Collection\Message
+     * @return \GroundSix\Component\Collection\Message
      */
     public function getMessages()
     {
@@ -90,7 +88,7 @@ class Profile
     /**
      * Gets all of the profiles
      * 
-     * @return \GroundSix\Component\Model\Collection\Profile
+     * @return \GroundSix\Component\Collection\Profile
      */
     public function getProfiles()
     {
@@ -114,6 +112,8 @@ class Profile
     }
 
     /**
+     * Close the current profile
+     *
      * @return Null
      */
     public function close()
