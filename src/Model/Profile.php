@@ -98,6 +98,8 @@ class Profile
     }
 
     /**
+     * Gets the start time
+     *
      * @return Float
      */
     public function getStartTime()
@@ -106,6 +108,8 @@ class Profile
     }
 
     /**
+     * Gets the end time
+     *
      * @return Float
      */
     public function getEndTime()
@@ -114,6 +118,8 @@ class Profile
     }
 
     /**
+     * Recursively closes each profile
+     *
      * @return Null
      */
     public function close()
