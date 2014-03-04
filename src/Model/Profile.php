@@ -28,14 +28,15 @@ class Profile implements \JsonSerializable
         $endTime,
         $messages = array(),
         /**
-         * @var Profile[]
+         * @var Collection\Profile
          */
-    $profiles = array(),
+    $profiles = null,
         $open = true;
 
     public function __construct()
     {
         $this->startTime = microtime(true);
+        $this->profiles = new Collection\Profile;
     }
 
     /**
@@ -47,11 +48,7 @@ class Profile implements \JsonSerializable
     public function addProfile(Profile &$profile)
     {
         if ($this->open) {
-            if (is_a($profile, '\GroundSix\Component\Model\Profile')) {
-                $this->profiles[] = $profile;
-            } else {
-                throw new \Exception("Provided object is not a Profile");
-            }
+            $this->profiles->add($profile);
         } else {
             throw new \Exception("Trying to add profile after closing the profile");
         }
@@ -89,7 +86,7 @@ class Profile implements \JsonSerializable
     /**
      * Gets all of the profiles
      * 
-     * @return \GroundSix\Component\Model\Profile[]
+     * @return \GroundSix\Component\Model\Collection\Profile
      */
     public function getProfiles()
     {
@@ -120,7 +117,7 @@ class Profile implements \JsonSerializable
         $this->open = false;
         $this->endTime = microtime(true);
 
-        foreach ($this->profiles as $profile) {
+        foreach ($this->profiles->get() as $profile) {
             $profile->close();
         }
     }

@@ -31,6 +31,7 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $profile);
         $messages = $profile->getMessages();
         $this->assertEquals(0, count($messages));
+
     }
 
     public function testAddMessage()
@@ -80,7 +81,8 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $profile->addProfile($new_profile);
         $child_profiles = $profile->getProfiles();
 
-        $this->assertEquals(1, count($child_profiles));
+        $this->assertEquals(1, $child_profiles->count());
+        $this->assertEquals($child_profiles->count(), count($child_profiles));
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $child_profiles[0]);
 
         $another_child_profile = new Profile();
@@ -88,7 +90,8 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $profile->addProfile($another_child_profile);
 
         $child_profiles = $profile->getProfiles();
-        $this->assertEquals(2, count($child_profiles));
+        $this->assertEquals(2, $child_profiles->count());
+        $this->assertEquals($child_profiles->count(), count($child_profiles));
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $child_profiles[1]);
         $exception = false;
 
@@ -111,6 +114,33 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         }
         $this->assertTrue($exception);
         $closed_profiles = $profile->getProfiles();
-        $this->assertEquals(2, count($closed_profiles));
+        $this->assertEquals(2, $closed_profiles->count());
+        $this->assertEquals($closed_profiles->count(), count($closed_profiles));
+    }
+
+    public function testJsonOutput()
+    {
+        $profile_1 = new Profile();
+        $profile_2 = new Profile();
+        $profile_2->addMessage('Message 1');
+        $profile_3 = new Profile();
+        $profile_3->addMessage('Message 2');
+        $profile_1->addProfile($profile_2);
+        $profile_2->addProfile($profile_3);
+        $profile_1_json = json_encode($profile_1);
+        $profile_2_json = json_encode($profile_2);
+        $profile_3_json = json_encode($profile_3);
+        $message_1_json = json_encode($profile_2->getMessages());
+        $message_2_json = json_encode($profile_3->getMessages());
+        $this->assertJson($message_1_json);
+        $this->assertJson($message_2_json);
+        $this->assertContains($message_1_json, $profile_2_json);
+        $this->assertContains($message_2_json, $profile_3_json);
+        $this->assertJson($profile_1_json);
+        $this->assertJson($profile_2_json);
+        $this->assertJson($profile_3_json);
+        $this->assertContains($profile_2_json, $profile_1_json);
+        $this->assertContains($profile_3_json, $profile_1_json);
+        $this->assertContains($profile_3_json, $profile_1_json);
     }
 }

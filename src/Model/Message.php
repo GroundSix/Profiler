@@ -21,7 +21,7 @@ namespace GroundSix\Component\Model;
  * 
  * @package GroundSix\Component\Model
  */
-class Message
+class Message implements \JsonSerializable
 {
     protected
         $time,
@@ -60,4 +60,20 @@ class Message
     {
         return $this->time;
     }
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    public function jsonSerialize()
+    {
+        $message = $this->message;
+        $time = $this->time;
+        return compact('message', 'time');
+    }
+
+
 }
