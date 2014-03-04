@@ -25,6 +25,15 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
      */
     public $profile;
 
+    public function __construct()
+    {
+        if (version_compare(PHP_VERSION, '5.4.0', 'lt')) {
+            class_alias(
+                'GroundSix\Component\Polyfill\JsonSerializable',
+                'JsonSerializable'
+            );
+        }
+    }
     public function testModelInstantiation()
     {
         $profile = new Profile();
