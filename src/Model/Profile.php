@@ -26,7 +26,10 @@ class Profile implements \JsonSerializable
     protected
         $startTime,
         $endTime,
-        $messages = array(),
+        /**
+         * @var Collection\Message
+         */
+        $messages = null,
         /**
          * @var Collection\Profile
          */
@@ -37,6 +40,7 @@ class Profile implements \JsonSerializable
     {
         $this->startTime = microtime(true);
         $this->profiles = new Collection\Profile;
+        $this->messages = new Collection\Message;
     }
 
     /**
@@ -64,7 +68,7 @@ class Profile implements \JsonSerializable
     {
         if ($this->open) {
             if (is_string($message)) {
-                $this->messages[] = new Message($message);
+                $this->messages->add(new Message($message));
             } else {
                 throw new \Exception("Message provided is not a string");
             }
@@ -76,7 +80,7 @@ class Profile implements \JsonSerializable
     /**
      * Gets all of the messages
      * 
-     * @return \GroundSix\Component\Model\Message[]
+     * @return \GroundSix\Component\Model\Collection\Message
      */
     public function getMessages()
     {

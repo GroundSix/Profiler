@@ -29,3 +29,10 @@ interface Profiler
     public function fetch();
     public function kill();
 }
+
+if (version_compare(PHP_VERSION, '5.4.0', 'lt')) {
+    class_alias(
+        'GroundSix\Component\Polyfill\JsonSerializable',
+        'JsonSerializable'
+    );
+}
