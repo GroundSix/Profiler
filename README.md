@@ -5,7 +5,15 @@
 
 ### Installation
 
-Preferred installation is via composer: [`"groundsix/profiler": "dev-master"`](https://packagist.org/packages/groundsix/profiler)
+Preferred installation is via composer: [groundsix/profiler](https://packagist.org/packages/groundsix/profiler)
+
+```json
+{
+    "require" : {
+        "groundsix/profiler": "dev-master"
+    }
+}
+```
 
 You can also clone the repository using git: `git clone git@github.com:GroundSix/Profiler.git`
 
