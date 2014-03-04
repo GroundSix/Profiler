@@ -21,7 +21,7 @@ namespace GroundSix\Component\Model;
  * 
  * @package GroundSix\Component\Model
  */
-class Profile implements \JsonSerializable
+class Profile
 {
     protected
         $startTime,

@@ -21,7 +21,7 @@ namespace GroundSix\Component\Model;
  * 
  * @package GroundSix\Component\Model
  */
-class Message implements \JsonSerializable
+class Message
 {
     protected
         $time,

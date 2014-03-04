@@ -9,7 +9,7 @@
 namespace GroundSix\Component\Model\Collection;
 
 
-class Profile implements \ArrayAccess, \JsonSerializable, \Countable
+class Profile implements \ArrayAccess, \Countable
 {
 
     protected $profiles = array();

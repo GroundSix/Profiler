@@ -9,7 +9,7 @@
 namespace GroundSix\Component\Model\Collection;
 
 
-class Message implements \ArrayAccess, \JsonSerializable, \Countable
+class Message implements \ArrayAccess, \Countable
 {
 
     protected $messages = array();
