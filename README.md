@@ -19,6 +19,7 @@ You can also clone the repository using git: `git clone git@github.com:GroundSix
 
 ### Tests
 
+    composer install
     phpunit --configuration phpunit.xml
 
 ### License
