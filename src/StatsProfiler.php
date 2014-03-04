@@ -79,7 +79,8 @@ class StatsProfiler implements Profiler
         foreach ($this->profilers as $profiler) {
             $profile = $profiler->fetch();
             if (is_null($this->profile->getEndTime())) {
-                $this->profile->addProfile($profiler->fetch());
+                $child_profile = $profiler->fetch();
+                $this->profile->addProfile($child_profile);
                 $profiler->stop();
             }
         }
@@ -111,7 +112,8 @@ class StatsProfiler implements Profiler
         }
         $profile = clone $this->profile;
         foreach ($this->profilers as $profiler) {
-            $profile->addProfile($profiler->fetch());
+            $child_profile = $profiler->fetch();
+            $profile->addProfile($child_profile);
         }
         return $profile;
     }
