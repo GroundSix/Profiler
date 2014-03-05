@@ -14,31 +14,41 @@
  * file that was distributed with this source code.
  */
 
-namespace GroundSix\Component\Model\Collection;
+namespace GroundSix\Component\Collection;
 
 /**
  * Class Message
  *
  * @package GroundSix\Component\Model\Collection
  */
-class Message implements \ArrayAccess, \Countable
+class BaseCollection implements \ArrayAccess, \Countable
 {
-    protected
-        $messages = array();
+    /**
+     * @var \GroundSix\Component\Model\BaseModel[]
+     */
+    protected $elements = array();
+
+    protected $elementType = null;
 
     public function count()
     {
-        return count($this->messages);
+        return count($this->elements);
     }
 
-    public function add(\GroundSix\Component\Model\Message $message)
+    /**
+     * @param \GroundSix\Component\Model\BaseModel $element
+     */
+    public function add(\GroundSix\Component\Model\BaseModel $element)
     {
-        $this->messages[] = $message;
+        $this->elements[] = $element;
     }
 
+    /**
+     * @return \GroundSix\Component\Model\BaseModel[]
+     */
     public function get()
     {
-        return $this->messages;
+        return $this->elements;
     }
 
     /**
@@ -55,7 +65,7 @@ class Message implements \ArrayAccess, \Countable
      */
     public function offsetExists($offset)
     {
-        return isset($this->messages[$offset]);
+        return isset($this->elements[$offset]);
 
     }
 
@@ -70,8 +80,8 @@ class Message implements \ArrayAccess, \Countable
      */
     public function offsetGet($offset)
     {
-        if (isset($this->messages[$offset])) {
-            return $this->messages[$offset];
+        if (isset($this->elements[$offset])) {
+            return $this->elements[$offset];
         }
         return null;
     }
@@ -88,21 +98,21 @@ class Message implements \ArrayAccess, \Countable
      * </p>
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $element)
     {
 
-        if (! is_a($value, '\GroundSix\Component\Model\Message')) {
-            throw new \Exception("Attempting to add an invalid item to the message collection");
+        if (! is_a($element, $this->elementType)) {
+            throw new \Exception("Attempting to add an invalid item collection");
         }
         if (is_null($offset)) {
-            $this->messages[] = $value;
+            $this->elements[] = $element;
             return;
         }
-        if (isset($this->messages[$offset])) {
+        if (isset($this->elements[$offset])) {
             throw new \Exception("Can not modify messages in a collection");
         }
 
-        $this->messages[$offset] = $value;
+        $this->elements[$offset] = $element;
     }
 
     /**
@@ -116,7 +126,7 @@ class Message implements \ArrayAccess, \Countable
      */
     public function offsetUnset($offset)
     {
-        unset($this->messages[$offset]);
+        unset($this->elements[$offset]);
     }
 
     /**
@@ -128,6 +138,6 @@ class Message implements \ArrayAccess, \Countable
      */
     public function jsonSerialize()
     {
-        return $this->messages;
+        return $this->elements;
     }
 }

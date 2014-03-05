@@ -18,31 +18,18 @@ namespace GroundSix\Component;
 
 /**
  * Class StatsProfiler
- * 
  * @package GroundSix\Component
  */
 class StatsProfiler implements Profiler
 {
-
-    /**
-     * @var \GroundSix\Component\Model\Profile $profile
-     * @var \Psr\Log\AbstractLogger $logger
-     * @var \GroundSix\Component\StatsProfiler
-     */
-    protected
-        /**
-         * @var Model\Profile
-         */
-        $profile,
-        /**
-         * @var StatsProfiler[]
-         */
-    $profilers = array(),
-        $logger,
-        /**
-         * @var Profiler
-         */
-    $parent;
+    /** @var Model\Profile $profile */
+    protected $profile;
+    /** @var Profiler[] $profilers */
+    protected $profilers = array();
+    /** @var \Psr\Log\AbstractLogger $logger */
+    protected $logger;
+    /** @var Profiler $parent */
+    protected $parent;
 
     public function __construct(Profiler &$profiler = null)
     {
@@ -77,7 +64,6 @@ class StatsProfiler implements Profiler
     public function stop()
     {
         foreach ($this->profilers as $profiler) {
-            $profile = $profiler->fetch();
             if (is_null($this->profile->getEndTime())) {
                 $child_profile = $profiler->fetch();
                 $this->profile->addProfile($child_profile);
@@ -133,5 +119,4 @@ class StatsProfiler implements Profiler
     {
         $this->logger = $logger;
     }
-
 }

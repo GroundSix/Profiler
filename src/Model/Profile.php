@@ -15,26 +15,26 @@
  */
 
 namespace GroundSix\Component\Model;
-
+use GroundSix\Component\Collection as Collection;
 /**
  * Class Profile
  *
  * @package GroundSix\Component\Model
  */
-class Profile
+class Profile extends BaseModel
 {
-    /**
-     * @var Int start time from mictotime
-     * @var Int end time from microtime
-     * @var Collection\Message
-     * @var Collection\Profile
-     */
-    protected
-        $startTime,
-        $endTime,
-        $messages = null,
-        $profiles = null,
-        $open = true;
+
+    /** @var float $startTime */
+    protected $startTime;
+    /** @var float $endTime */
+    protected $endTime;
+    /** @var \GroundSix\Component\Collection\Message */
+    protected $messages;
+    /** @var \GroundSix\Component\Collection\Profile */
+    protected $profiles;
+    /** @var bool */
+    protected $open = true;
+
 
     public function __construct()
     {
@@ -79,8 +79,9 @@ class Profile
 
     /**
      * Gets all of the messages
-     *
-     * @return \GroundSix\Component\Model\Collection\Message
+     * 
+     * @return \GroundSix\Component\Collection\Message
+
      */
     public function getMessages()
     {
@@ -89,8 +90,8 @@ class Profile
 
     /**
      * Gets all of the profiles
-     *
-     * @return \GroundSix\Component\Model\Collection\Profile
+     * 
+     * @return \GroundSix\Component\Collection\Profile
      */
     public function getProfiles()
     {
@@ -102,8 +103,11 @@ class Profile
      *
      * @return Float
      */
-    public function getStartTime()
+    public function getStartTime($format = false)
     {
+        if ($format && !is_null($this->startTime)) {
+            return $this->microtimeToDateFormat($this->startTime);
+        }
         return $this->startTime;
     }
 
@@ -112,8 +116,11 @@ class Profile
      *
      * @return Float
      */
-    public function getEndTime()
+    public function getEndTime($format = false)
     {
+        if ($format && !is_null($this->endTime)) {
+            return $this->microtimeToDateFormat($this->endTime);
+        }
         return $this->endTime;
     }
 
@@ -142,11 +149,10 @@ class Profile
     public function jsonSerialize()
     {
         $object = new \stdClass;
-        $object->startTime = $this->startTime;
-        $object->endTime   = $this->endTime;
+        $object->startTime = $this->microtimeToDateFormat($this->startTime);
+        $object->endTime   = $this->microtimeToDateFormat($this->endTime);
         $object->messages  = $this->messages;
         $object->profiles  = $this->profiles;
-
         return $object;
     }
 }
