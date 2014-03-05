@@ -23,12 +23,25 @@ namespace GroundSix\Component\Model;
  */
 abstract class BaseModel
 {
+    protected
+        $id;
+
     /**
      * Get the relevant data from the object
      *
      * @return Object
      */
     abstract public function getData();
+
+    public function __construct()
+    {
+        $this->id = microtime(true) . '-' . rand();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Convert microtime to a date format so it's not so

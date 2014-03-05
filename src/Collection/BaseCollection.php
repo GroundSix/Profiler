@@ -31,7 +31,6 @@ abstract class BaseCollection implements \ArrayAccess, \Countable
         $elements = array(),
         $elementType = null;
 
-
     public function __construct()
     {
         if(is_null($this->elementType)) {
@@ -52,7 +51,14 @@ abstract class BaseCollection implements \ArrayAccess, \Countable
      */
     public function add(\GroundSix\Component\Model\BaseModel $element)
     {
-        $this->elements[] = $element;
+        if (!in_array($element, $this->elements)) {
+            foreach($this->elements as $elem) {
+                if ($elem->getId() === $element->getId()) {
+                    return null;
+                }
+            }
+            $this->elements[] = $element;
+        }
     }
 
     /**

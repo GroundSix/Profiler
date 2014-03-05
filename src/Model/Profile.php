@@ -30,12 +30,14 @@ class Profile extends BaseModel
      * @var Float $endTime
      * @var \GroundSix\Component\Collection\Message
      * @var \GroundSix\Component\Collection\Profile
+     * @var String
      */
     protected
         $startTime,
         $endTime,
         $messages,
-        $profiles;
+        $profiles,
+        $id;
 
     /**
      * Sets a new sart time and creates an instance
@@ -45,6 +47,7 @@ class Profile extends BaseModel
      */
     public function __construct()
     {
+        parent::__construct();
         $this->startTime = microtime(true);
         $this->profiles  = new Collection\Profile;
         $this->messages  = new Collection\Message;
@@ -60,7 +63,9 @@ class Profile extends BaseModel
     public function addProfile(Profile &$profile)
     {
         if (is_null($this->endTime)) {
-            $this->profiles->add($profile);
+            if (! in_array($profile, (array) $this->profiles)) {
+                $this->profiles->add($profile);
+            }
         } else {
             throw new \Exception("Trying to add profile after closing the profile");
         }
