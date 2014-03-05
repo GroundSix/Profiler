@@ -38,7 +38,7 @@ abstract class BaseModel {
         }
         $seconds = floor($microtime);
         $microseconds = $microtime - $seconds;
-        list($i, $microseconds) = explode('.', round($microseconds, 6));
+        list($i, $microseconds) = explode('.', round($microseconds, 3));
         return date($format, $seconds) . '.' . $microseconds;
     }
 

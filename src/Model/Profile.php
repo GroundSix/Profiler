@@ -34,8 +34,6 @@ class Profile extends BaseModel
     protected $messages;
     /** @var \GroundSix\Component\Collection\Profile */
     protected $profiles;
-    /** @var bool */
-    protected $open = true;
 
 
     public function __construct()
@@ -53,7 +51,7 @@ class Profile extends BaseModel
      */
     public function addProfile(Profile &$profile)
     {
-        if ($this->open) {
+        if (is_null($this->endTime)) {
             $this->profiles->add($profile);
         } else {
             throw new \Exception("Trying to add profile after closing the profile");
@@ -68,7 +66,7 @@ class Profile extends BaseModel
      */
     public function addMessage($message)
     {
-        if ($this->open) {
+        if (is_null($this->endTime)) {
             if (is_string($message)) {
                 $this->messages->add(new Message($message));
             } else {
@@ -133,11 +131,12 @@ class Profile extends BaseModel
      */
     public function close()
     {
-        $this->open = false;
-        $this->endTime = microtime(true);
+        if (is_null($this->endTime)) {
+            $this->endTime = microtime(true);
 
-        foreach ($this->profiles->get() as $profile) {
-            $profile->close();
+            foreach ($this->profiles->get() as $profile) {
+                $profile->close();
+            }
         }
     }
 

@@ -24,4 +24,5 @@ class NullProfiler implements Profiler
     public function fetch() {}
     public function kill() {}
     public function setLogger(\Psr\Log\LoggerInterface $logger) {}
+    public function __destruct() {}
 }

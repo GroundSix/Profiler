@@ -90,7 +90,13 @@ class ProfileTest extends TestCase
         $this->assertNotNull($profiler_5->fetch()->getEndTime());
     }
 
-    public function testLogging() {
-
+    public function testDestructor()
+    {
+        $profiler_1 = new StatsProfiler();
+        $profiler_1->setLogger($this->logger);
+        $profiler_2 = $profiler_1->start();
+        $profiler_1->__destruct();
+        $this->assertNotNull($profiler_2->fetch()->getEndTime());
+        $this->assertContains($profiler_2->fetch()->toJson(), $this->logger->debugData);
     }
 } 
