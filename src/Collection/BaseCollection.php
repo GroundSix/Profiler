@@ -30,14 +30,12 @@ abstract class BaseCollection implements \ArrayAccess, \Countable
     /** @var string  */
     protected $elementType = null;
 
-
     public function __construct()
     {
         if(is_null($this->elementType)) {
             throw new \Exception("Collections must have the \$elementType parameter set");
         }
     }
-
 
     /**
      * @return int The number of elements in the collection
@@ -52,7 +50,14 @@ abstract class BaseCollection implements \ArrayAccess, \Countable
      */
     public function add(\GroundSix\Component\Model\BaseModel $element)
     {
-        $this->elements[] = $element;
+        if (!in_array($element, $this->elements)) {
+            foreach($this->elements as $elem) {
+                if ($elem->getId() === $element->getId()) {
+                    return null;
+                }
+            }
+            $this->elements[] = $element;
+        }
     }
 
     /**

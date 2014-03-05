@@ -36,7 +36,7 @@ class ProfileTest extends TestCase
         $profile_2 = $profiler->fetch();
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $profile_2);
         $messages = $profile_2->getMessages();
-        $this->assertEquals(2, count($messages));
+        $this->assertEquals(2, $messages->count());
         $this->assertEquals($msg_1, $messages[0]->getMessage());
         $this->assertEquals($msg_2, $messages[1]->getMessage());
         $this->assertGreaterThanOrEqual($profile_2->getStartTime(), $messages[0]->getTime());
@@ -47,10 +47,10 @@ class ProfileTest extends TestCase
     {
         $profiler_1 = new StatsProfiler();
         $profiler_1->setLogger($this->logger);
-        $profiler_2 = $profiler_1->start();
-        $profiler_3 = $profiler_2->start();
-        $profiler_4 = $profiler_3->start();
-        $profiler_5 = $profiler_4->start();
+        $profiler_2 = $profiler_1->start('1');
+        $profiler_3 = $profiler_2->start('2');
+        $profiler_4 = $profiler_3->start('3');
+        $profiler_5 = $profiler_4->start('4');
 
         $profiler_4->stop();
         $this->assertNotNull($profiler_4->fetch()->getEndTime());
@@ -65,6 +65,7 @@ class ProfileTest extends TestCase
         $this->assertNull($profiler_2->fetch()->getEndTime());
         $this->assertNotNull($profiler_3->fetch()->getEndTime());
         $profiler_1->stop();
+        echo $profiler_1->fetch()->toJson();
         $this->assertNotNull($profiler_1->fetch()->getEndTime());
         $this->assertNotNull($profiler_2->fetch()->getEndTime());
         $this->assertNotNull($profiler_3->fetch()->getEndTime());

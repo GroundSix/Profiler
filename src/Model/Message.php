@@ -36,6 +36,7 @@ class Message extends BaseModel
      */
     public function __construct($message)
     {
+        parent::__construct();
         $this->time = microtime(true);
         $this->message = $message;
     }

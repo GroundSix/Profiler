@@ -17,12 +17,24 @@
 namespace GroundSix\Component\Model;
 
 abstract class BaseModel {
+
     /**
      * Get the relevant data from the object
      *
      * @return object
      */
     abstract public function getData();
+
+    protected $id;
+    public function __construct()
+    {
+        $this->id = microtime(true) . '-' . rand();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Convert microtime to a date format so it's not so unpleasing on the eye
@@ -59,5 +71,6 @@ abstract class BaseModel {
     {
         return $this->toJson($this);
     }
-} 
+
+}
 
