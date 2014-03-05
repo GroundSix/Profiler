@@ -36,8 +36,8 @@ class StatsProfiler implements Profiler
     public function __construct(Profiler &$profiler = null)
     {
         $this->profile = new Model\Profile;
-        $this->parent = &$profiler;
-        $this->logger = new \Psr\Log\NullLogger();
+        $this->parent  = &$profiler;
+        $this->logger  = new \Psr\Log\NullLogger();
     }
 
     /**
@@ -120,15 +120,12 @@ class StatsProfiler implements Profiler
 
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
-        $this->logActive = true;
         $this->logger = $logger;
     }
 
     protected function makeLog()
     {
-        if ($this->logActive) {
-            $this->logger->debug($this->profile->toJson());
-        }
+        $this->logger->debug($this->profile->toJson());
     }
 
     public function __destruct()
