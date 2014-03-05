@@ -63,11 +63,15 @@ class Message extends BaseModel
         return $this->time;
     }
 
-
+    /**
+     * Returns the message and the time
+     *
+     * @return Object message and time
+     */
     public function getData()
     {
         $message = $this->message;
-        $time = $this->microtimeToDateFormat($this->time);
+        $time    = $this->microtimeToDateFormat($this->time);
 
         // consistency, return an object
         return (object) compact('message', 'time');
