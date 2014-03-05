@@ -23,5 +23,6 @@ namespace GroundSix\Component\Collection;
  */
 class Message extends BaseCollection
 {
-    protected $elementType = '\GroundSix\Component\Model\Message';
+    protected
+        $elementType = '\GroundSix\Component\Model\Message';
 }
