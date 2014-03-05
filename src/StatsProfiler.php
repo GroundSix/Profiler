@@ -130,4 +130,12 @@ class StatsProfiler implements Profiler
             $this->logger->debug($this->profile->toJson());
         }
     }
+
+    public function __destruct()
+    {
+        $this->stop();
+        if (is_null($this->parent)) {
+            $this->fetch();
+        }
+    }
 }
