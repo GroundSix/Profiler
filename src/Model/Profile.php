@@ -21,7 +21,7 @@ use GroundSix\Component\Collection as Collection;
  *
  * @package GroundSix\Component\Model
  */
-class Profile
+class Profile extends BaseModel
 {
 
     /** @var float $startTime */
@@ -103,8 +103,11 @@ class Profile
      *
      * @return Float
      */
-    public function getStartTime()
+    public function getStartTime($format = false)
     {
+        if ($format && !is_null($this->startTime)) {
+            return $this->microtimeToDateFormat($this->startTime);
+        }
         return $this->startTime;
     }
 
@@ -113,8 +116,11 @@ class Profile
      *
      * @return Float
      */
-    public function getEndTime()
+    public function getEndTime($format = false)
     {
+        if ($format && !is_null($this->endTime)) {
+            return $this->microtimeToDateFormat($this->endTime);
+        }
         return $this->endTime;
     }
 
@@ -143,11 +149,10 @@ class Profile
     public function jsonSerialize()
     {
         $object = new \stdClass;
-        $object->startTime = $this->startTime;
-        $object->endTime   = $this->endTime;
+        $object->startTime = $this->microtimeToDateFormat($this->startTime);
+        $object->endTime   = $this->microtimeToDateFormat($this->endTime);
         $object->messages  = $this->messages;
         $object->profiles  = $this->profiles;
-
         return $object;
     }
 }

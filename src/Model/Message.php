@@ -21,7 +21,7 @@ namespace GroundSix\Component\Model;
  *
  * @package GroundSix\Component\Model
  */
-class Message
+class Message extends BaseModel
 {
     protected
         $time,
@@ -56,8 +56,11 @@ class Message
      *
      * @return Float
      */
-    public function getTime()
+    public function getTime($format = false)
     {
+        if ($format) {
+            return $this->microtimeToDateFormat($this->time);
+        }
         return $this->time;
     }
 
@@ -71,7 +74,7 @@ class Message
     public function jsonSerialize()
     {
         $message = $this->message;
-        $time = $this->time;
+        $time = $this->microtimeToDateFormat($this->time);
         return compact('message', 'time');
     }
 }
