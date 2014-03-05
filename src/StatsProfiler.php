@@ -22,16 +22,19 @@ namespace GroundSix\Component;
  */
 class StatsProfiler implements Profiler
 {
-    /** @var Model\Profile $profile */
-    protected $profile;
-    /** @var Profiler[] $profilers */
-    protected $profilers = array();
-    /** @var \Psr\Log\AbstractLogger $logger */
-    protected $logger;
-    /** @var Profiler $parent */
-    protected $parent;
-    /** @var bool */
-    protected $logActive = false;
+    /** 
+     * @var Model\Profile $profile
+     * @var Profiler[] $profilers
+     * @var \Psr\Log\AbstractLogger $logger
+     * @var Profiler $parent
+     * @var bool 
+     */
+    protected
+        $profile,
+        $profilers = array(),
+        $logger,
+        $parent,
+        $logActive = false;
 
     public function __construct(Profiler &$profiler = null)
     {
