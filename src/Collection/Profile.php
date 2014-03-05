@@ -23,5 +23,6 @@ namespace GroundSix\Component\Collection;
  */
 class Profile extends BaseCollection
 {
-    protected $elementType = '\GroundSix\Component\Model\Profile';
+    protected
+        $elementType = '\GroundSix\Component\Model\Profile';
 }
