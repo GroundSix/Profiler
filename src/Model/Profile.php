@@ -15,7 +15,9 @@
  */
 
 namespace GroundSix\Component\Model;
+
 use GroundSix\Component\Collection as Collection;
+
 /**
  * Class Profile
  *
@@ -79,7 +81,7 @@ class Profile extends BaseModel
 
     /**
      * Gets all of the messages
-     * 
+     *
      * @return \GroundSix\Component\Collection\Message
 
      */
@@ -90,7 +92,7 @@ class Profile extends BaseModel
 
     /**
      * Gets all of the profiles
-     * 
+     *
      * @return \GroundSix\Component\Collection\Profile
      */
     public function getProfiles()
