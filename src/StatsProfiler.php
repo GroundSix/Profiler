@@ -135,6 +135,11 @@ class StatsProfiler implements Profiler
         $this->logger = $logger;
     }
 
+    /**
+     * Push JSON to logger
+     *
+     * @return Null
+     */
     protected function makeLog()
     {
         $this->logger->debug($this->profile->toJson());
