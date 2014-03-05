@@ -36,6 +36,14 @@ class StatsProfiler implements Profiler
         $parent,
         $logActive = false;
 
+    /**
+     * Creates a new profile, assign the parent
+     * and creates an instance of the null logger
+     *
+     * @param \GroundSix\Component\Profiler profiler instance
+     *
+     * @return Null
+     */
     public function __construct(Profiler &$profiler = null)
     {
         $this->profile = new Model\Profile;
