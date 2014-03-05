@@ -1,15 +1,23 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: andrew
- * Date: 05/03/2014
- * Time: 12:29
+ * Ground Six Profiler
+ *
+ * @author Andrew Willis  twitter.com/ilovefluffy
+ * @author Harry Lawrence twitter.com/harry4_
+ *
+ * (c) Ground Six 2014
+ *
+ * License: MIT
+ * 
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace GroundSix\Component\Logger;
 
-
-class TestLogger implements \Psr\Log\LoggerInterface {
+class TestLogger implements \Psr\Log\LoggerInterface
+{
     /**
      * System is unusable.
      *
@@ -19,6 +27,7 @@ class TestLogger implements \Psr\Log\LoggerInterface {
      */
     public function emergency($message, array $context = array())
     {
+
     }
 
     /**
@@ -33,6 +42,7 @@ class TestLogger implements \Psr\Log\LoggerInterface {
      */
     public function alert($message, array $context = array())
     {
+
     }
 
     /**
@@ -59,6 +69,7 @@ class TestLogger implements \Psr\Log\LoggerInterface {
      */
     public function error($message, array $context = array())
     {
+
     }
 
     /**
@@ -73,6 +84,7 @@ class TestLogger implements \Psr\Log\LoggerInterface {
      */
     public function warning($message, array $context = array())
     {
+
     }
 
     /**
@@ -84,6 +96,7 @@ class TestLogger implements \Psr\Log\LoggerInterface {
      */
     public function notice($message, array $context = array())
     {
+    
     }
 
     /**
@@ -125,5 +138,4 @@ class TestLogger implements \Psr\Log\LoggerInterface {
     {
         // TODO: Implement log() method.
     }
-
-} 
+}
