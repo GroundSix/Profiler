@@ -18,12 +18,8 @@ namespace GroundSix\Component;
 
 use GroundSix\Component\Model\Profile;
 
-class ProfileModelTest extends \PHPUnit_Framework_TestCase
+class ProfileModelTest extends TestCase
 {
-    /**
-     * @var $profile Model\Profile
-     */
-    public $profile;
 
     public function testModelInstantiation()
     {
@@ -31,11 +27,6 @@ class ProfileModelTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\GroundSix\Component\Model\Profile', $profile);
         $messages = $profile->getMessages();
         $this->assertEquals(0, count($messages));
-        $timezone = ini_get('date.timezone');
-        if (is_null($timezone) || !$timezone) {
-            date_default_timezone_set('UTC');
-        }
-
     }
 
     public function testAddMessage()

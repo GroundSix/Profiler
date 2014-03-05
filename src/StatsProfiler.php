@@ -30,6 +30,8 @@ class StatsProfiler implements Profiler
     protected $logger;
     /** @var Profiler $parent */
     protected $parent;
+    /** @var bool */
+    protected $logActive = false;
 
     public function __construct(Profiler &$profiler = null)
     {
@@ -94,6 +96,7 @@ class StatsProfiler implements Profiler
     {
         if (!is_null($this->profile->getEndTime()))
         {
+            $this->makeLog();
             return $this->profile;
         }
         $profile = clone $this->profile;
@@ -117,6 +120,14 @@ class StatsProfiler implements Profiler
 
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
+        $this->logActive = true;
         $this->logger = $logger;
+    }
+
+    protected function makeLog()
+    {
+        if ($this->logActive) {
+            $this->logger->debug($this->profile->toJson());
+        }
     }
 }

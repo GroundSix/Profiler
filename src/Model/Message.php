@@ -21,6 +21,7 @@ namespace GroundSix\Component\Model;
  *
  * @package GroundSix\Component\Model
  */
+
 class Message extends BaseModel
 {
     protected
@@ -40,8 +41,7 @@ class Message extends BaseModel
     }
 
     /**
-     * Gets the message for a given
-     * push
+     * Gets the message for a given push
      *
      * @return String
      */
@@ -64,17 +64,13 @@ class Message extends BaseModel
         return $this->time;
     }
 
-    /**
-     * (PHP 5 &gt;= 5.4.0)<br/>
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     */
-    public function jsonSerialize()
+
+    public function getData()
     {
         $message = $this->message;
         $time = $this->microtimeToDateFormat($this->time);
-        return compact('message', 'time');
+
+        // consistency, return an object
+        return (object) compact('message', 'time');
     }
 }

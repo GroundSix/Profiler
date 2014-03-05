@@ -101,7 +101,7 @@ class Profile extends BaseModel
     /**
      * Gets the start time
      *
-     * @return Float
+     * @return string|Float
      */
     public function getStartTime($format = false)
     {
@@ -140,19 +140,16 @@ class Profile extends BaseModel
     }
 
     /**
-     * (PHP 5 >= 5.4.0)<br/>
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
+     * @return object|\stdClass
      */
-    public function jsonSerialize()
+    public function getData()
     {
         $object = new \stdClass;
         $object->startTime = $this->microtimeToDateFormat($this->startTime);
         $object->endTime   = $this->microtimeToDateFormat($this->endTime);
-        $object->messages  = $this->messages;
-        $object->profiles  = $this->profiles;
+        $object->messages = $this->messages->getData();
+        $object->profiles = $this->profiles->getData();
+
         return $object;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GroundSix\Component;
 
-class ProfileTest extends \PHPUnit_Framework_TestCase
+class ProfileTest extends TestCase
 {
 
     public function testCreateProfiler()
@@ -46,6 +46,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function testStopProfiler()
     {
         $profiler_1 = new StatsProfiler();
+        $profiler_1->setLogger($this->logger);
         $profiler_2 = $profiler_1->start();
         $profiler_3 = $profiler_2->start();
         $profiler_4 = $profiler_3->start();
@@ -69,6 +70,9 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($profiler_3->fetch()->getEndTime());
         $this->assertNotNull($profiler_4->fetch()->getEndTime());
         $this->assertNotNull($profiler_5->fetch()->getEndTime());
+
+        $this->assertEquals($this->logger->debugData, $profiler_1->fetch()->toJson());
+        $this->assertNotEquals($this->logger->debugData, $profiler_5->fetch()->toJson());
     }
 
     public function testKillProfiler()
@@ -84,5 +88,9 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($profiler_3->fetch()->getEndTime());
         $this->assertNotNull($profiler_4->fetch()->getEndTime());
         $this->assertNotNull($profiler_5->fetch()->getEndTime());
+    }
+
+    public function testLogging() {
+
     }
 } 

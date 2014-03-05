@@ -21,15 +21,25 @@ namespace GroundSix\Component\Collection;
  *
  * @package GroundSix\Component\Model\Collection
  */
-class BaseCollection implements \ArrayAccess, \Countable
+abstract class BaseCollection implements \ArrayAccess, \Countable
 {
-    /**
-     * @var \GroundSix\Component\Model\BaseModel[]
-     */
+    /** @var \GroundSix\Component\Model\BaseModel[] */
     protected $elements = array();
 
+    /** @var string  */
     protected $elementType = null;
 
+    public function __construct()
+    {
+        if(is_null($this->elementType)) {
+            throw new \Exception("Collections must have the \$elementType parameter set");
+        }
+    }
+
+
+    /**
+     * @return int The number of elements in the collection
+     */
     public function count()
     {
         return count($this->elements);
@@ -130,14 +140,30 @@ class BaseCollection implements \ArrayAccess, \Countable
     }
 
     /**
-     * (PHP 5 &gt;= 5.4.0)<br/>
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
+     * @return string
      */
-    public function jsonSerialize()
+    final public function toJson()
     {
-        return $this->elements;
+        return json_encode($this->getData());
+    }
+
+    /**
+     * @return object
+     */
+    final public function getData()
+    {
+        $elements = $this->elements;
+        array_walk($elements, function (&$element) {
+                $element = $element->getData();
+            });
+        return $elements;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode($this);
     }
 }
