@@ -17,7 +17,7 @@
 namespace GroundSix\Component\Collection;
 
 /**
- * Class Message
+ * Class BaseCollection
  *
  * @package GroundSix\Component\Model\Collection
  */
@@ -26,9 +26,9 @@ class BaseCollection implements \ArrayAccess, \Countable
     /**
      * @var \GroundSix\Component\Model\BaseModel[]
      */
-    protected $elements = array();
-
-    protected $elementType = null;
+    protected
+        $elements = array(),
+        $elementType = null;
 
     public function count()
     {
@@ -66,7 +66,6 @@ class BaseCollection implements \ArrayAccess, \Countable
     public function offsetExists($offset)
     {
         return isset($this->elements[$offset]);
-
     }
 
     /**

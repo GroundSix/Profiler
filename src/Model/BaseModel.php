@@ -16,6 +16,11 @@
 
 namespace GroundSix\Component\Model;
 
+/**
+ * Class BaseModel
+ *
+ * @package GroundSix\Component\Model
+ */
 abstract class BaseModel
 {
     abstract public function jsonSerialize();
