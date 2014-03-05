@@ -23,12 +23,13 @@ namespace GroundSix\Component\Collection;
  */
 abstract class BaseCollection implements \ArrayAccess, \Countable
 {
-
-    /** @var \GroundSix\Component\Model\BaseModel[] */
-    protected $elements = array();
-
-    /** @var string  */
-    protected $elementType = null;
+    /**
+     * @var \GroundSix\Component\Model\BaseModel[]
+     * @var String
+     */
+    protected
+        $elements = array(),
+        $elementType = null;
 
 
     public function __construct()
@@ -37,7 +38,6 @@ abstract class BaseCollection implements \ArrayAccess, \Countable
             throw new \Exception("Collections must have the \$elementType parameter set");
         }
     }
-
 
     /**
      * @return int The number of elements in the collection
