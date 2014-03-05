@@ -105,8 +105,7 @@ class StatsProfiler implements Profiler
      */
     public function fetch()
     {
-        if (!is_null($this->profile->getEndTime()))
-        {
+        if (!is_null($this->profile->getEndTime())) {
             $this->makeLog();
             return $this->profile;
         }
