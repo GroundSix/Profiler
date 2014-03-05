@@ -16,20 +16,28 @@
 
 namespace GroundSix\Component\Model;
 
-abstract class BaseModel {
+/**
+ * Class BaseModel
+ *
+ * @package GroundSix\Component\Model
+ */
+abstract class BaseModel
+{
     /**
      * Get the relevant data from the object
      *
-     * @return object
+     * @return Object
      */
     abstract public function getData();
 
     /**
-     * Convert microtime to a date format so it's not so unpleasing on the eye
+     * Convert microtime to a date format so it's not so
+     * unpleasing on the eye
      *
-     * @param bool $microtime
-     * @param string $format
-     * @return string
+     * @param Bool $microtime
+     * @param String $format
+     *
+     * @return String
      */
     public function microtimeToDateFormat($microtime = false, $format = 'Y-m-d H:i:s')
     {
@@ -53,11 +61,13 @@ abstract class BaseModel {
     }
 
     /**
+     * Allow to echo object as string
+     * in the form of JSON
+     *
      * @return string
      */
     public function __toString()
     {
         return $this->toJson($this);
     }
-} 
-
+}

@@ -21,7 +21,6 @@ namespace GroundSix\Component\Model;
  *
  * @package GroundSix\Component\Model
  */
-
 class Message extends BaseModel
 {
     protected
