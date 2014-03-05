@@ -145,6 +145,12 @@ class StatsProfiler implements Profiler
         $this->logger->debug($this->profile->toJson());
     }
 
+    /**
+     * Stop logging and fetch all logged
+     * data
+     *
+     * @return Null
+     */
     public function __destruct()
     {
         $this->stop();
