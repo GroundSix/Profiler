@@ -25,17 +25,24 @@ use GroundSix\Component\Collection as Collection;
  */
 class Profile extends BaseModel
 {
+    /**
+     * @var Float $startTime
+     * @var Float $endTime
+     * @var \GroundSix\Component\Collection\Message
+     * @var \GroundSix\Component\Collection\Profile
+     */
+    protected
+        $startTime,
+        $endTime,
+        $messages,
+        $profiles;
 
-    /** @var float $startTime */
-    protected $startTime;
-    /** @var float $endTime */
-    protected $endTime;
-    /** @var \GroundSix\Component\Collection\Message */
-    protected $messages;
-    /** @var \GroundSix\Component\Collection\Profile */
-    protected $profiles;
-
-
+    /**
+     * Sets a new sart time and creates an instance
+     * of both the Profile and Message collection
+     *
+     * @return Null
+     */
     public function __construct()
     {
         $this->startTime = microtime(true);
@@ -47,6 +54,7 @@ class Profile extends BaseModel
      * @param Profile $profile
      *
      * @throws \Exception
+     *
      * @return Null
      */
     public function addProfile(Profile &$profile)
@@ -62,6 +70,7 @@ class Profile extends BaseModel
      * @param String $message
      *
      * @throws \Exception
+     *
      * @return Null
      */
     public function addMessage($message)
@@ -81,7 +90,7 @@ class Profile extends BaseModel
      * Gets all of the messages
      *
      * @return \GroundSix\Component\Collection\Message
-
+     *
      */
     public function getMessages()
     {
@@ -141,6 +150,9 @@ class Profile extends BaseModel
     }
 
     /**
+     * Returns time and message data in the
+     * form of a stdClass
+     *
      * @return object|\stdClass
      */
     public function getData()
@@ -148,8 +160,8 @@ class Profile extends BaseModel
         $object = new \stdClass;
         $object->startTime = $this->microtimeToDateFormat($this->startTime);
         $object->endTime   = $this->microtimeToDateFormat($this->endTime);
-        $object->messages = $this->messages->getData();
-        $object->profiles = $this->profiles->getData();
+        $object->messages  = $this->messages->getData();
+        $object->profiles  = $this->profiles->getData();
 
         return $object;
     }
