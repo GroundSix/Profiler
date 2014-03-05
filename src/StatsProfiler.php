@@ -112,6 +112,8 @@ class StatsProfiler implements Profiler
 
     /**
      * Kill all parent and child profiles
+     *
+     * @return Null
      */
     public function kill()
     {
@@ -121,6 +123,13 @@ class StatsProfiler implements Profiler
         }
     }
 
+    /**
+     * Set the logger to override null logger
+     *
+     * @param Object|\Psr\Log\LoggerInterface
+     *
+     * @return Null
+     */
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
