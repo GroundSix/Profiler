@@ -72,7 +72,7 @@ class Message extends BaseModel
     public function getData()
     {
         $message = $this->message;
-        $time    = $this->microtimeToDateFormat($this->time);
+        $time    = $this->microtimeToDateFormat($this->time, "H:i:s");
 
         // Consistency, return an object
         return (object) compact('message', 'time');
