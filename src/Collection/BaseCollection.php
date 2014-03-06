@@ -162,7 +162,7 @@ abstract class BaseCollection implements \ArrayAccess, \Countable
         $elements = $this->elements;
         array_walk($elements, function (&$element) {
                 $element = $element->getData();
-            });
+        });
         return $elements;
     }
 
