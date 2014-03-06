@@ -163,12 +163,11 @@ class Profile extends BaseModel
     public function getData()
     {
         $object = new \stdClass;
-        $object->startTime = $this->microtimeToDateFormat($this->startTime);
-        $object->endTime   = $this->microtimeToDateFormat($this->endTime);
+        $object->startTime = $this->microtimeToDateFormat($this->startTime, 'H:i:s');
+        $object->endTime   = $this->microtimeToDateFormat($this->endTime, 'H:i:s');
         $object->duration  = round(((float) $this->endTime - (float) $this->startTime), 4);
         $object->messages  = $this->messages->getData();
         $object->profiles  = $this->profiles->getData();
-
         return $object;
     }
 }

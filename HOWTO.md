@@ -29,7 +29,6 @@ $tiered_profile->push('Super Message');
 function doAmazingCode($special_profile)
 {
     $special_profile->kill();
-
 }
 
 
