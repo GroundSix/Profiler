@@ -71,8 +71,8 @@ class ProfileTest extends TestCase
         $this->assertNotNull($profiler_4->fetch()->getEndTime());
         $this->assertNotNull($profiler_5->fetch()->getEndTime());
 
-        $this->assertEquals($this->logger->debugData, $profiler_1->fetch()->toJson());
-        $this->assertNotEquals($this->logger->debugData, $profiler_5->fetch()->toJson());
+        $this->assertEquals($this->logger->debugData, date('Y-m-d H:i:s') . '-' . $profiler_1->fetch()->toJson());
+        $this->assertNotEquals($this->logger->debugData, date('Y-m-d H:i:s') . '-' . $profiler_5->fetch()->toJson());
     }
 
     public function testKillProfiler()

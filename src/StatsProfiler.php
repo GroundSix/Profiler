@@ -150,7 +150,7 @@ class StatsProfiler implements Profiler
      */
     protected function makeLog()
     {
-        $this->logger->debug($this->profile->toJson());
+        $this->logger->debug(date('Y-m-d H:i:s') . '-' . $this->profile->toJson());
     }
 
     /**
