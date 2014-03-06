@@ -74,7 +74,7 @@ class Message extends BaseModel
         $message = $this->message;
         $time    = $this->microtimeToDateFormat($this->time);
 
-        // consistency, return an object
+        // Consistency, return an object
         return (object) compact('message', 'time');
     }
 }
