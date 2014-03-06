@@ -165,7 +165,7 @@ class Profile extends BaseModel
         $object = new \stdClass;
         $object->startTime = $this->microtimeToDateFormat($this->startTime);
         $object->endTime   = $this->microtimeToDateFormat($this->endTime);
-        $object->duration  = round(($this->endTime - $this->startTime), 4);
+        $object->duration  = round(((float) $this->endTime - (float) $this->startTime), 4);
         $object->messages  = $this->messages->getData();
         $object->profiles  = $this->profiles->getData();
 

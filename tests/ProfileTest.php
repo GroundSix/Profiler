@@ -97,6 +97,7 @@ class ProfileTest extends TestCase
         $profiler_2 = $profiler_1->start();
         $profiler_1->__destruct();
         $this->assertNotNull($profiler_2->fetch()->getEndTime());
+
         $this->assertContains($profiler_2->fetch()->toJson(), $this->logger->debugData);
     }
 } 

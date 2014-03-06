@@ -126,8 +126,9 @@ class StatsProfiler implements Profiler
     {
         $this->stop();
         if (! is_null($this->parent)) {
-            $this->parent->kill();
+            return $this->parent->kill();
         }
+        return $this->fetch();
     }
 
     /**
