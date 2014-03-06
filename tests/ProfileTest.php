@@ -65,7 +65,6 @@ class ProfileTest extends TestCase
         $this->assertNull($profiler_2->fetch()->getEndTime());
         $this->assertNotNull($profiler_3->fetch()->getEndTime());
         $profiler_1->stop();
-        echo $profiler_1->fetch()->toJson();
         $this->assertNotNull($profiler_1->fetch()->getEndTime());
         $this->assertNotNull($profiler_2->fetch()->getEndTime());
         $this->assertNotNull($profiler_3->fetch()->getEndTime());
