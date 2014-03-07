@@ -38,6 +38,11 @@ abstract class BaseModel
         $this->generateId();
     }
 
+    /**
+     * generate the ID for the model
+     *
+     * @return String
+     */
     public function generateId () {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $this->id = '';

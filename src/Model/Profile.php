@@ -182,10 +182,10 @@ class Profile extends BaseModel
      */
     public function getDuration()
     {
-        if (! is_float($this->endTime)) {
-            return number_format(round(($this->endTime - microtime(true)), 4), 4, '.', '');
+        if (is_null($this->endTime)) {
+            return number_format(round(($this->endTime - microtime(true)), 3), 3, '.', '');
         }
-        return number_format(round(($this->endTime - $this->startTime), 4), 4, '.', '');
+        return number_format(round(($this->endTime - $this->startTime), 3), 3, '.', '');
     }
 
     /**
