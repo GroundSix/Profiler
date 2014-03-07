@@ -24,6 +24,7 @@ namespace GroundSix\Component;
 interface Profiler
 {
     public function start($message = '');
+    public function setName($name);
     public function stop();
     public function push($message = '');
     public function fetch();

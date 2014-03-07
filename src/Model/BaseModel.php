@@ -35,7 +35,18 @@ abstract class BaseModel
 
     public function __construct()
     {
-        $this->id = microtime(true) . '-' . rand();
+        $this->generateId();
+    }
+
+    public function generateId () {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $this->id = '';
+        for ($i = 0; $i < 16; $i++) {
+            $this->id .= $characters[rand(0, strlen($characters) - 1)];
+            if (($i) % 4 === 0 && ($i + 1) < 16) {
+                $this->id .= '-';
+            }
+        }
     }
 
     public function getId()

@@ -52,17 +52,27 @@ class StatsProfiler implements Profiler
     }
 
     /**
+     * Name the current profile
+     *
+     * @param String $name The name to be assigned to the profile
+     */
+    public function setName($name)
+    {
+        $this->profile->setName($name);
+    }
+
+    /**
      * Starts the profiling process
      *
-     * @param  String $message Optional message to be logged on start
+     * @param  String $name The optional name of the profile
      *
      * @return Object|\GroundSix\Component\StatsProfiler
      */
-    public function start($message = '')
+    public function start($name = '')
     {
         $profiler = new StatsProfiler($this);
-        if ($message !== '') {
-            $profiler->push($message);
+        if ($name !== '') {
+            $profiler->setName($name);
         }
 
         $this->profilers[] = &$profiler;

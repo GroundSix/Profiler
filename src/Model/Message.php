@@ -73,8 +73,8 @@ class Message extends BaseModel
     {
         $message = $this->message;
         $time    = $this->microtimeToDateFormat($this->time, "H:i:s");
-
+        $rawTime = number_format($this->time, 3, '.', '');
         // Consistency, return an object
-        return (object) compact('message', 'time');
+        return (object) compact('message', 'time', 'rawTime');
     }
 }

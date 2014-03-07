@@ -37,10 +37,11 @@ class Profile extends BaseModel
         $endTime,
         $messages,
         $profiles,
-        $id;
+        $id,
+        $name;
 
     /**
-     * Sets a new sart time and creates an instance
+     * Sets a new start time and creates an instance
      * of both the Profile and Message collection
      *
      * @return Null
@@ -162,12 +163,47 @@ class Profile extends BaseModel
      */
     public function getData()
     {
-        $object = new \stdClass;
-        $object->startTime = $this->microtimeToDateFormat($this->startTime, 'H:i:s');
-        $object->endTime   = $this->microtimeToDateFormat($this->endTime, 'H:i:s');
-        $object->duration  = round(((float) $this->endTime - (float) $this->startTime), 4);
-        $object->messages  = $this->messages->getData();
-        $object->profiles  = $this->profiles->getData();
-        return $object;
+        return (object) array(
+            'name' => $this->getName(),
+            'startTime' => $this->microtimeToDateFormat($this->startTime, 'H:i:s'),
+            'endTime'  => $this->microtimeToDateFormat($this->endTime, 'H:i:s'),
+            'rawStartTime' => number_format($this->startTime, 3, '.', ''),
+            'rawEndTime' => number_format($this->endTime, 3, '.', ''),
+            'duration' => $this->getDuration(),
+            'messages' => $this->messages->getData(),
+            'profiles' => $this->profiles->getData()
+        );
+    }
+
+    /**
+     * Get the duration of the profiled excecution
+     *
+     * @return string
+     */
+    public function getDuration()
+    {
+        if (! is_float($this->endTime)) {
+            return number_format(round(($this->endTime - microtime(true)), 4), 4, '.', '');
+        }
+        return number_format(round(($this->endTime - $this->startTime), 4), 4, '.', '');
+    }
+
+    /**
+     * Set the profiles name
+     *
+     * @param String $name
+     */
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    /**
+     * Get the profiles name, or its ID if the name is null
+     *
+     * @return String
+     */
+    public function getName()
+    {
+        return !is_null($this->name) ? $this->name : $this->id;
     }
 }
