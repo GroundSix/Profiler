@@ -16,8 +16,6 @@
 
 namespace GroundSix\Component\Model;
 
-use GroundSix\Component\Collection as Collection;
-
 /**
  * Class Profile
  *
@@ -50,8 +48,8 @@ class Profile extends BaseModel
     {
         parent::__construct();
         $this->startTime = microtime(true);
-        $this->profiles  = new Collection\Profile;
-        $this->messages  = new Collection\Message;
+        $this->profiles  = new Collection('GroundSix\Component\Model\Profile');
+        $this->messages  = new Collection('GroundSix\Component\Model\Message');
     }
 
     /**
